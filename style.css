@@ -1,10 +1,19 @@
-/* Container that holds both the front and back sides */
+/* Styling for the game grid */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-gap: 20px; /* Space between cards */
+  justify-content: center; /* Center the grid horizontally */
+  align-items: center; /* Center the grid vertically */
+  margin: 20px;
+}
+
+/* Container that holds both the front and back sides of each card */
 .cardContainer {
   perspective: 1000px; /* This gives the 3D effect */
   width: 200px;
   height: 300px;
-  margin: 20px;
-  position: relative; /* Ensures card stack is aligned */
+  position: relative; /* Ensure the card stack is aligned */
   cursor: pointer; /* Add a pointer cursor for better UX */
 }
 
