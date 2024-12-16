@@ -1,24 +1,56 @@
-// Select all card containers
-const cardContainers = document.querySelectorAll(".cardContainer");
+// Initialize the score
+let score = 0;
+let flippedCards = [];
+
+// Update the score display
+function updateScore() {
+  document.getElementById("scoreBoard").innerText = "Score: " + score;
+}
 
 // Function to toggle the flip effect on each card
 function matchingGame(event) {
   const cardContainer = event.currentTarget; // Get the card container that was clicked
+
+  // Prevent flipping more than 2 cards at a time
+  if (cardContainer.classList.contains("flipped") || flippedCards.length === 2)
+    return;
+
   cardContainer.classList.toggle("flipped");
+
+  // Push the flipped card into the flippedCards array
+  flippedCards.push(cardContainer);
+
+  // If two cards are flipped, check for a match
+  if (flippedCards.length === 2) {
+    setTimeout(() => checkMatch(), 1000); // Delay for 1 second before checking the match
+  }
 }
 
-// Add event listener to each card container
-cardContainers.forEach((card) => {
-  card.addEventListener("click", matchingGame);
-});
+// Function to check if the two flipped cards match
+function checkMatch() {
+  const [card1, card2] = flippedCards;
 
-const startButton = document.getElementById("startGameButton");
-const cardGrid = document.querySelector(".cardGrid");
-const cards = Array.from(cardGrid.getElementsByClassName("cardContainer"));
+  // Compare the cards' back images or data to check if they match
+  if (
+    card1.querySelector(".imageFaceCard img").src ===
+    card2.querySelector(".imageFaceCard img").src
+  ) {
+    // If they match, add 100 to the score
+    score += 100;
+    updateScore(); // Update the score on the screen
+  } else {
+    // If they don't match, flip them back
+    card1.classList.remove("flipped");
+    card2.classList.remove("flipped");
+  }
 
-// Fisher-Yates Shuffle Algorithm
+  // Reset the flipped cards array for the next pair
+  flippedCards = [];
+}
+
+// Function to shuffle the cards using Fisher-Yates algorithm
 function shuffleCards() {
-  console.log("Shuffling cards..."); // Debug log
+  console.log("Shuffling cards...");
   let shuffledCards = cards.slice();
 
   // Fisher-Yates shuffle algorithm
@@ -35,7 +67,7 @@ function shuffleCards() {
     cardGrid.appendChild(card);
   });
 
-  console.log("Cards shuffled"); // Debug log
+  console.log("Cards shuffled");
 
   // Change the button to Reset Game after the game starts
   startButton.textContent = "Reset Game";
@@ -45,19 +77,25 @@ function shuffleCards() {
 
 // Function to reset the game
 function resetGame() {
-  // Revert button text to Play Game
-  startButton.textContent = "Play Game";
+  score = 0;
+  updateScore(); // Reset the score display
+  flippedCards = [];
 
-  // Optionally, you could shuffle cards back or reset the game state
-  // Here, we'll just clear the grid for simplicity
+  // Clear the grid and reset the flip state of cards
   cardGrid.innerHTML = "";
 
-  // Recreate the cards to restore the initial state (You can improve this by storing the original card order)
+  // Recreate the cards to restore the initial state
   createCards();
 
   // Add the event listener back to start the game again
   startButton.removeEventListener("click", resetGame);
   startButton.addEventListener("click", shuffleCards);
+
+  // Flip all cards to the front (remove flipped class)
+  const allCards = document.querySelectorAll(".cardContainer");
+  allCards.forEach((card) => {
+    card.classList.remove("flipped"); // Remove flipped class to flip the card back to the front
+  });
 }
 
 // Function to create the cards again
@@ -83,7 +121,6 @@ function createCards() {
         "https://images.pexels.com/photos/1789968/pexels-photo-1789968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       back: "https://duet-cdn.vox-cdn.com/thumbor/0x0:929x525/640x427/filters:focal(464x262:465x263):format(webp)/cdn.vox-cdn.com/uploads/chorus_asset/file/15877061/Screen_Shot_2016-08-01_at_12.34.21_PM.0.0.1470069300.png",
     },
-    // Add more cards as needed
   ];
 
   initialCards.forEach((card) => {
@@ -110,4 +147,20 @@ function createCards() {
 }
 
 // Add event listener for start button click
-startButton.addEventListener("click", shuffleCards);
+const startButton = document.getElementById("startGameButton");
+startButton.addEventListener("click", function () {
+  // On Play Game button click, reset and shuffle the cards
+  if (startButton.textContent === "Play Game") {
+    shuffleCards(); // Shuffle and start the game
+  } else {
+    resetGame(); // Reset the game
+  }
+});
+
+const cardGrid = document.querySelector(".cardGrid");
+const cards = Array.from(cardGrid.getElementsByClassName("cardContainer"));
+
+// Add event listeners for each card container
+cards.forEach((card) => {
+  card.addEventListener("click", matchingGame);
+});

@@ -1,20 +1,42 @@
+/* Ensure the title remains visible */
+.gameTitle {
+  text-align: center;
+  color: white;
+  margin-bottom: 10px; /* Add space below the title */
+  z-index: 10; /* Ensure title is above other elements */
+  font-size: 36px; /* Adjust the font size as needed */
+}
+
+/* Styling for the score */
+#scoreBoard {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+  text-align: center;
+  color: #333;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 /* Styling for the game grid */
 .cardGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 columns */
-  grid-gap: 56px; /* Space between cards */
+  grid-gap: 10px; /* Space between cards */
   justify-content: center; /* Center the grid horizontally */
   align-items: center; /* Center the grid vertically */
-  margin: 20px;
+  margin-top: 20px; /* Add space below score */
 }
 
 /* Container that holds both the front and back sides of each card */
 .cardContainer {
   perspective: 1000px; /* This gives the 3D effect */
-  width: 200px;
-  height: 200px;
+  width: 150px; /* Adjusted size to fit on screen */
+  height: 150px; /* Adjusted size to fit on screen */
   position: relative; /* Ensure the card stack is aligned */
   cursor: pointer; /* Add a pointer cursor for better UX */
+  margin: 0 auto;
 }
 
 /* Flip card styles */
@@ -47,6 +69,7 @@
 .imageFaceCard img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 /* Style for the "Play Game" button */
@@ -69,28 +92,33 @@
   background-color: #45a049;
 }
 
-/* You can add additional styles for the cards here */
-.cardGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* Display 4 cards per row */
-  gap: 10px;
-  margin-top: 20px;
+body {
+  background: linear-gradient(
+    to right,
+    blue,
+    #feb47b
+  ); /* Gradient from blue to orange horizontally */
+  height: 100vh; /* Ensure the background covers the entire viewport */
+  margin: 0; /* Remove default margin */
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Align elements from top */
+  align-items: center;
+  padding-top: 40px; /* Add padding to ensure space at top */
 }
 
-.cardContainer {
-  position: relative;
-  width: 90%;
-  padding-bottom: 90%; /* Keep the cards square */
-  background-color: #ccc;
-}
-
-.cardContainer img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+/* Title styling */
 .gameTitle {
   text-align: center;
+  color: white;
+  margin-bottom: 10px; /* Add space below the title */
+}
+
+/* Main container for the title, score, and grid */
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
