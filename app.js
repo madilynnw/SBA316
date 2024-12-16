@@ -9,7 +9,7 @@ function updateScore() {
 
 // Function to toggle the flip effect on each card
 function matchingGame(event) {
-  const cardContainer = event.currentTarget; // Get the card container that was clicked
+  const cardContainer = event.currentTarget;
 
   // Prevent flipping more than 2 cards at a time
   if (cardContainer.classList.contains("flipped") || flippedCards.length === 2)
@@ -53,7 +53,6 @@ function shuffleCards() {
   console.log("Shuffling cards...");
   let shuffledCards = cards.slice();
 
-  // Fisher-Yates shuffle algorithm
   for (let i = shuffledCards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffledCards[i], shuffledCards[j]] = [shuffledCards[j], shuffledCards[i]];
@@ -81,13 +80,10 @@ function resetGame() {
   updateScore(); // Reset the score display
   flippedCards = [];
 
-  // Clear the grid and reset the flip state of cards
   cardGrid.innerHTML = "";
 
-  // Recreate the cards to restore the initial state
   createCards();
 
-  // Add the event listener back to start the game again
   startButton.removeEventListener("click", resetGame);
   startButton.addEventListener("click", shuffleCards);
 

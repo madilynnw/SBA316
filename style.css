@@ -1,10 +1,9 @@
-/* Ensure the title remains visible */
-.gameTitle {
+/ .gameTitle {
   text-align: center;
   color: white;
-  margin-bottom: 10px; /* Add space below the title */
-  z-index: 10; /* Ensure title is above other elements */
-  font-size: 36px; /* Adjust the font size as needed */
+  margin-bottom: 10px;
+  z-index: 10;
+  font-size: 36px;
 }
 
 /* Styling for the score */
@@ -22,19 +21,19 @@
 /* Styling for the game grid */
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columns */
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px; /* Space between cards */
   justify-content: center; /* Center the grid horizontally */
   align-items: center; /* Center the grid vertically */
-  margin-top: 20px; /* Add space below score */
+  margin-top: 20px;
 }
 
 /* Container that holds both the front and back sides of each card */
 .cardContainer {
-  perspective: 1000px; /* This gives the 3D effect */
-  width: 150px; /* Adjusted size to fit on screen */
-  height: 150px; /* Adjusted size to fit on screen */
-  position: relative; /* Ensure the card stack is aligned */
+  perspective: 1000px;
+  width: 150px;
+  height: 150px;
+  position: relative;
   cursor: pointer; /* Add a pointer cursor for better UX */
   margin: 0 auto;
 }
@@ -64,7 +63,6 @@
   transform: rotateY(0deg); /* Show the back */
 }
 
-/* Optional: Styling for the images to fit the card */
 .flipCard img,
 .imageFaceCard img {
   width: 100%;
@@ -98,21 +96,20 @@ body {
     blue,
     #feb47b
   ); /* Gradient from blue to orange horizontally */
-  height: 100vh; /* Ensure the background covers the entire viewport */
-  margin: 0; /* Remove default margin */
+  height: 100vh;
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* Align elements from top */
   align-items: center;
-  padding-top: 40px; /* Add padding to ensure space at top */
+  padding-top: 40px;
 }
 
 /* Title styling */
 .gameTitle {
   text-align: center;
   color: white;
-  margin-bottom: 10px; /* Add space below the title */
+  margin-bottom: 5px;
 }
 
 /* Main container for the title, score, and grid */
