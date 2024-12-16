@@ -1,11 +1,11 @@
-const flipCard = document.querySelector(".flipCard");
+// Select the card container
+const cardContainer = document.querySelector(".cardContainer");
 
-const imageFaceCard = document.querySelector(".imageFaceCard");
-
+// Function to toggle the flip effect
 function matchingGame() {
-  // Toggle the 'flipped' class on both the flipCard and imageFaceCard to flip the card back and forth
-  flipCard.classList.toggle("flipped");
-  imageFaceCard.classList.toggle("flipped");
+  // Toggle the 'flipped' class on the cardContainer to flip the card back and forth
+  cardContainer.classList.toggle("flipped");
 }
 
-flipCard.addEventListener("click", matchingGame);
+// Add event listener to the card container
+cardContainer.addEventListener("click", matchingGame);
